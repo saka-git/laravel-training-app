@@ -1,0 +1,2 @@
+// ヘッダーのドロップダウン
+$(".dropdown-trigger").dropdown();
