@@ -6,7 +6,7 @@
     <div class="col s2">
       <div>
         <ul>
-          <li><a>Training</a></li>
+          <li><a href="{{ route('training.index') }}">Training</a></li>
           <li><a>その他</a></li>
         </ul>
       </div>
