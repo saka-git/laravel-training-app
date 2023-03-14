@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class TrainingResult extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function training_menu()
+    {
+        return $this->belongsTo('App\Models\TrainingMenu');
+    }
+
 }
