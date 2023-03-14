@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\TrainingResultController;
 
 
 /*
@@ -16,6 +17,8 @@ use App\Http\Controllers\WebController;
 */
 
 Route::get('/',  [WebController::class, 'index']);
+
+Route::resource('training', TrainingResultController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
 
 
 Auth::routes();

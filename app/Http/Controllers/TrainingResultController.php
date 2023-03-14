@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\TrainingResult;
+use App\Models\TrainingMenu;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TrainingResultController extends Controller
@@ -14,7 +16,7 @@ class TrainingResultController extends Controller
      */
     public function index()
     {
-        //
+        return view('training.index');
     }
 
     /**
@@ -35,7 +37,15 @@ class TrainingResultController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $trainigResult = new TrainingResult();
+        $trainigResult->user_id = Auth::user()->id;
+        $trainigResult->training_menu_id = $request->input('training_menu_id');
+        $trainigResult->weight = $request->input('weight');
+        $trainigResult->rep = $request->input('rep');
+        $trainigResult->date = $request->input('date');
+        $trainigResult->save();
+
+        return redirect()->route('training.index');
     }
 
     /**
@@ -69,7 +79,14 @@ class TrainingResultController extends Controller
      */
     public function update(Request $request, TrainigResult $trainigResult)
     {
-        //
+        $trainigResult->user_id = Auth::user()->id;
+        $trainigResult->training_menu_id = $request->input('training_menu_id');
+        $trainigResult->weight = $request->input('weight');
+        $trainigResult->rep = $request->input('rep');
+        $trainigResult->date = $request->input('date');
+        $trainigResult->update();
+        
+        return redirect()->route('training.index');
     }
 
     /**
@@ -80,6 +97,8 @@ class TrainingResultController extends Controller
      */
     public function destroy(TrainigResult $trainigResult)
     {
-        //
+        $trainigResult->delete();
+        
+        return redirect()->route('training.index');
     }
 }
