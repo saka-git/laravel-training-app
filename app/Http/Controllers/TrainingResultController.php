@@ -18,8 +18,9 @@ class TrainingResultController extends Controller
     public function index()
     {
         $training_categories = TrainingCategory::all();
+        $training_menus = TrainingMenu::all();
 
-        return view('training.index', compact('training_categories'));
+        return view('training.index', compact('training_categories', 'training_menus'));
     }
 
     /**

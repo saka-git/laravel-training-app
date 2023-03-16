@@ -15,7 +15,7 @@
       <div class="row d-flex justify-content-between">
         <h5>0/0のトレーニンングメニュー</h5>
         <div>
-          <!-- 今日のトレーニング追加用モーダル -->
+          <!-- トレーニング追加用モーダル -->
           @include('modals.add_training_result')
           <!-- パーソナルデータ追加用モーダル -->
           @include('modals.add_personal_data')       

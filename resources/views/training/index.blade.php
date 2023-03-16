@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- トレーニング追加用モーダル -->
+@include('modals.add_training_result')
 <!-- トレーニングメニュー追加用モーダル -->
 @include('modals.add_training_menu')
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">

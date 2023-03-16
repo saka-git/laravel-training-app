@@ -15,15 +15,15 @@
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <label for="product-category">トレーニングカテゴリ</label>
-            <select name="training_category_id" class="form-control">
+            <label>トレーニングカテゴリ</label>
+            <select class="form-select" name="training_category_id">
               @foreach ($training_categories as $training_category)
               <option value="{{ $training_category->id }}">{{ $training_category->name }}</option>
               @endforeach
             </select>
           </div>
           <div class="form-group">
-            <label for="product-price">トレーニングメニュー名</label>
+            <label>トレーニングメニュー名</label>
             <input type="text" name="name" class="form-control">
           </div>
         </div>
