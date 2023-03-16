@@ -19,15 +19,16 @@
     <!-- Styles -->
 
 </head>
-<body>
-    <div id="app">
-        @component('components.header')
-        @endcomponent
-    
+<body style="padding: 60px 0;">
+  <div id="app">
+    @component('components.header')
+    @endcomponent
 
-        <main>
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4 mb-5">
+      @yield('content')
+    </main>
+
+  </div>
 </body>
+
 </html>
