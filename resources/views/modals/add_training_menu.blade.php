@@ -11,13 +11,26 @@
         <h5 class="modal-title" id="addTrainingMenuModalLabel">トレーニングメニューの追加</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      <form action="{{ route('menus.store') }}" method="post">
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="product-category">トレーニングカテゴリ</label>
+            <select name="training_category_id" class="form-control">
+              @foreach ($training_categories as $training_category)
+              <option value="{{ $training_category->id }}">{{ $training_category->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="product-price">トレーニングメニュー名</label>
+            <input type="text" name="name" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">追加</button>
+        </div>
+      </form>  
     </div>
   </div>
 </div>

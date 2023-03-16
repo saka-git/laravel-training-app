@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TrainingResult;
+use App\Models\TrainingCategory;
 use App\Models\TrainingMenu;
+use App\Models\TrainingResult;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class TrainingResultController extends Controller
      */
     public function index()
     {
-        return view('training.index');
+        $training_categories = TrainingCategory::all();
+
+        return view('training.index', compact('training_categories'));
     }
 
     /**
@@ -37,13 +40,13 @@ class TrainingResultController extends Controller
      */
     public function store(Request $request)
     {
-        $trainigResult = new TrainingResult();
-        $trainigResult->user_id = Auth::user()->id;
-        $trainigResult->training_menu_id = $request->input('training_menu_id');
-        $trainigResult->weight = $request->input('weight');
-        $trainigResult->rep = $request->input('rep');
-        $trainigResult->date = $request->input('date');
-        $trainigResult->save();
+        $trainingResult = new TrainingResult();
+        $trainingResult->user_id = Auth::user()->id;
+        $trainingResult->training_menu_id = $request->input('training_menu_id');
+        $trainingResult->weight = $request->input('weight');
+        $trainingResult->rep = $request->input('rep');
+        $trainingResult->date = $request->input('date');
+        $trainingResult->save();
 
         return redirect()->route('training.index');
     }
@@ -51,10 +54,10 @@ class TrainingResultController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TrainigResult  $trainigResult
+     * @param  \App\Models\TrainingResult  $trainingResult
      * @return \Illuminate\Http\Response
      */
-    public function show(TrainigResult $trainigResult)
+    public function show(TrainingResult $trainingResult)
     {
         //
     }
@@ -62,10 +65,10 @@ class TrainingResultController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TrainigResult  $trainigResult
+     * @param  \App\Models\trainingResult  $trainingResult
      * @return \Illuminate\Http\Response
      */
-    public function edit(TrainigResult $trainigResult)
+    public function edit(trainingResult $trainingResult)
     {
         //
     }
@@ -74,17 +77,17 @@ class TrainingResultController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TrainigResult  $trainigResult
+     * @param  \App\Models\trainingResult  $trainingResult
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TrainigResult $trainigResult)
+    public function update(Request $request, trainingResult $trainingResult)
     {
-        $trainigResult->user_id = Auth::user()->id;
-        $trainigResult->training_menu_id = $request->input('training_menu_id');
-        $trainigResult->weight = $request->input('weight');
-        $trainigResult->rep = $request->input('rep');
-        $trainigResult->date = $request->input('date');
-        $trainigResult->update();
+        $trainingResult->user_id = Auth::user()->id;
+        $trainingResult->training_menu_id = $request->input('training_menu_id');
+        $trainingResult->weight = $request->input('weight');
+        $trainingResult->rep = $request->input('rep');
+        $trainingResult->date = $request->input('date');
+        $trainingResult->update();
         
         return redirect()->route('training.index');
     }
@@ -92,12 +95,12 @@ class TrainingResultController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TrainigResult  $trainigResult
+     * @param  \App\Models\trainingResult  $trainingResult
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TrainigResult $trainigResult)
+    public function destroy(trainingResult $trainingResult)
     {
-        $trainigResult->delete();
+        $trainingResult->delete();
         
         return redirect()->route('training.index');
     }
