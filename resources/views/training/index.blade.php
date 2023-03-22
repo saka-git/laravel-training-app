@@ -54,6 +54,7 @@
     role="tabpanel"
     aria-labelledby="pills-{{ $training_category->id }}-tab"
   >
+    <button type="button" class="btn btn-outline-primary">All</button>
     @foreach ($training_menus as $training_menu)
     @if ($training_menu->training_category_id === $training_category->id)
     <button type="button" class="btn btn-outline-primary">{{ $training_menu->name }}</button>

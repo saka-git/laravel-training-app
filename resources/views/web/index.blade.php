@@ -13,7 +13,7 @@
     </div>
     <div class="col-9">
       <div class="row d-flex justify-content-between">
-        <h5>0/0のトレーニンングメニュー</h5>
+        <h5>{{ $latest_training_result->date }}のトレーニンングメニュー</h5>
         <div>
           <!-- トレーニング追加用モーダル -->
           @include('modals.add_training_result')
@@ -21,19 +21,22 @@
           @include('modals.add_personal_data')       
         </div>
       </div>
-
-      <div class="row">
-        <div class="card" style="width: 18rem;">
+    <div class="row">
+      @foreach ($distinct_training_menus as $distinct_training_menu)
+        <div class="card col-3" style="width: 18rem;">
           <div class="card-header">
-            Featured
+            {{ $distinct_training_menu->training_menu_id }}
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            @foreach ($training_results as $training_result)
+              @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)
+                <li class="list-group-item">{{ $training_result->weight }}kg×{{ $training_result->rep }}回</li>
+              @endif
+            @endforeach
           </ul>
         </div>
-      </div>
+      @endforeach
+    </div>
     </div>
   </div>
 @endsection
