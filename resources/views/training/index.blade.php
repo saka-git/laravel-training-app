@@ -9,70 +9,57 @@
   <li class="nav-item" role="presentation">
     <button
       class="nav-link active"
-      id="pills-home-tab"
+      id="pills-all-tab"
       data-bs-toggle="pill"
-      data-bs-target="#pills-home"
+      data-bs-target="#pills-all"
       type="button"
       role="tab"
-      aria-controls="pills-home"
+      aria-controls="pills-all"
       aria-selected="true"
     >
-      Home
+      All
     </button>
   </li>
+  @foreach ($training_categories as $training_category)
   <li class="nav-item" role="presentation">
     <button
       class="nav-link"
-      id="pills-profile-tab"
+      id="pills-{{ $training_category->id }}-tab"
       data-bs-toggle="pill"
-      data-bs-target="#pills-profile"
+      data-bs-target="#pills-{{ $training_category->id }}"
       type="button"
       role="tab"
-      aria-controls="pills-profile"
+      aria-controls="pills-{{ $training_category->id }}"
       aria-selected="false"
     >
-      Profile
+    {{ $training_category->name }}
     </button>
   </li>
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link"
-      id="pills-contact-tab"
-      data-bs-toggle="pill"
-      data-bs-target="#pills-contact"
-      type="button"
-      role="tab"
-      aria-controls="pills-contact"
-      aria-selected="false"
-    >
-      Contact
-    </button>
-  </li>
+  @endforeach
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div
     class="tab-pane fade show active"
-    id="pills-home"
+    id="pills-all"
     role="tabpanel"
-    aria-labelledby="pills-home-tab"
+    aria-labelledby="pills-all-tab"
   >
-    ...
+    ALLlLLLLL
   </div>
+  
+  @foreach ($training_categories as $training_category)
   <div
     class="tab-pane fade"
-    id="pills-profile"
+    id="pills-{{ $training_category->id }}"
     role="tabpanel"
-    aria-labelledby="pills-profile-tab"
+    aria-labelledby="pills-{{ $training_category->id }}-tab"
   >
-    ...
+    @foreach ($training_menus as $training_menu)
+    @if ($training_menu->training_category_id === $training_category->id)
+    <button type="button" class="btn btn-outline-primary">{{ $training_menu->name }}</button>
+    @endif
+    @endforeach
   </div>
-  <div
-    class="tab-pane fade"
-    id="pills-contact"
-    role="tabpanel"
-    aria-labelledby="pills-contact-tab"
-  >
-    ...
-  </div>
+  @endforeach
 </div>
 @endsection
