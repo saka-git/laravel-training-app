@@ -44,7 +44,8 @@
     role="tabpanel"
     aria-labelledby="pills-all-tab"
   >
-    ALLlLLLLL
+    <button type="button" class="btn btn-outline-primary">カレンダー</button>
+    <button type="button" class="btn btn-outline-primary">グラフ</button>
   </div>
   
   @foreach ($training_categories as $training_category)
