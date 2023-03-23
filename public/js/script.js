@@ -24,3 +24,17 @@ $(function () {
 
     //add_training_resultモーダルが閉じた時リセット
 });
+
+const calenderBtnAction = () => {
+    const myCalender = document.getElementById("myCalender");
+    const myChart = document.getElementById("myChart");
+    myCalender.style.display = "block";
+    myChart.style.display = "none";
+};
+
+const chartBtnAction = () => {
+    const myCalender = document.getElementById("myCalender");
+    const myChart = document.getElementById("myChart");
+    myCalender.style.display = "block";
+    myChart.style.display = "none";
+};

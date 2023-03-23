@@ -25,7 +25,7 @@
       @foreach ($distinct_training_menus as $distinct_training_menu)
         <div class="card col-3" style="width: 18rem;">
           <div class="card-header">
-            {{ $distinct_training_menu->training_menu_id }}
+            {{ $distinct_training_menu->name }}
           </div>
           <ul class="list-group list-group-flush">
             @foreach ($training_results as $training_result)

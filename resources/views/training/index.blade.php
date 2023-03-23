@@ -39,9 +39,9 @@
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
-    <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" checked>
+    <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" checked onClick="calenderBtnAction()">
       <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
-    <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off">
+    <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off" onClick="alert(789)">
       <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
   <div>
     <canvas id="myChart"></canvas>
