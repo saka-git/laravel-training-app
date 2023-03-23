@@ -38,23 +38,15 @@
   @endforeach
 </ul>
 <div class="tab-content" id="pills-tabContent">
-  <div
-    class="tab-pane fade show active"
-    id="pills-all"
-    role="tabpanel"
-    aria-labelledby="pills-all-tab"
-  >
-    <button type="button" class="btn btn-outline-primary">カレンダー</button>
-    <button type="button" class="btn btn-outline-primary">グラフ</button>
+  <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+    <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
+    <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off">
+      <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
   </div>
   
   @foreach ($training_categories as $training_category)
-  <div
-    class="tab-pane fade"
-    id="pills-{{ $training_category->id }}"
-    role="tabpanel"
-    aria-labelledby="pills-{{ $training_category->id }}-tab"
-  >
+  <div class="tab-pane fade" id="pills-{{ $training_category->id }}" role="tabpanel" aria-labelledby="pills-{{ $training_category->id }}-tab">
     <button type="button" class="btn btn-outline-primary">All</button>
     @foreach ($training_menus as $training_menu)
     @if ($training_menu->training_category_id === $training_category->id)
