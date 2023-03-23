@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\TrainingMenuController;
 use App\Http\Controllers\TrainingResultController;
+use App\Http\Controllers\ChartController;
 
 
 /*
@@ -26,3 +27,11 @@ Route::resource('training', TrainingResultController::class)->only(['index', 'st
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// チャートデータ取得処理
+Route::get('/chart-get', [ChartController::class, 'chartGet'])->name('chart-get');
+
+/* chart.js用お試し　後で削除 */
+Route::get('/chartjs', function () {
+    return view('chartjs');
+});

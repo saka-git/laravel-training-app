@@ -43,6 +43,9 @@
       <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
     <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off">
       <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
   </div>
   
   @foreach ($training_categories as $training_category)
