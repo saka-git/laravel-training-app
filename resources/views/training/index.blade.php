@@ -38,27 +38,36 @@
   @endforeach
 </ul>
 <div class="tab-content" id="pills-tabContent">
-  <div
-    class="tab-pane fade show active"
-    id="pills-all"
-    role="tabpanel"
-    aria-labelledby="pills-all-tab"
-  >
-    <button type="button" class="btn btn-outline-primary">カレンダー</button>
-    <button type="button" class="btn btn-outline-primary">グラフ</button>
+  <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+    <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" checked onClick="calendarBtnAction()">
+      <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
+    <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off" onClick="chartBtnAction()">
+      <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
+    <div id="myCalendar" class="wrapper">
+      <h1 id="header"></h1>
+      <div id="next-prev-button">
+        <button id="prev" onclick="prev()">‹</button>
+        <button id="next" onclick="next()">›</button>
+      </div>
+      <div id="calendar"></div>
+    </div>
+    <script>
+      let trainingResults = @json($training_results);
+    </script>
+
+    <div id="myChart">
+      <canvas id="myChart1"></canvas>
+    </div>
   </div>
   
   @foreach ($training_categories as $training_category)
-  <div
-    class="tab-pane fade"
-    id="pills-{{ $training_category->id }}"
-    role="tabpanel"
-    aria-labelledby="pills-{{ $training_category->id }}-tab"
-  >
-    <button type="button" class="btn btn-outline-primary">All</button>
+  <div class="tab-pane fade" id="pills-{{ $training_category->id }}" role="tabpanel" aria-labelledby="pills-{{ $training_category->id }}-tab">
+    <input type="radio" class="btn-check" name="training-{{ $training_category->id }}" id="option-{{ $training_category->id }}-all" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}-all">All</label>
     @foreach ($training_menus as $training_menu)
-    @if ($training_menu->training_category_id === $training_category->id)
-    <button type="button" class="btn btn-outline-primary">{{ $training_menu->name }}</button>
+    @if ($training_menu->training_category_id === $training_category->id)  
+    <input type="radio" class="btn-check" name="training-{{ $training_category->id }}" id="option-{{ $training_category->id }}-{{ $training_menu->id }}" autocomplete="off">
+      <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}-{{ $training_menu->id }}">{{ $training_menu->name }}</label>
     @endif
     @endforeach
   </div>
