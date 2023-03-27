@@ -6,7 +6,7 @@
 /* カレンダー */
 .wrapper {
     max-width: 600px;
-    margin: 0 auto;
+    margin-left: 20px;
     color: #666;
 }
 #header {

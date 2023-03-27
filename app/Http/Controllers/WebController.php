@@ -15,8 +15,9 @@ class WebController extends Controller
         $training_results = DB::select('select * from training_results where date = (select max(date) from training_results)');
         $distinct_training_menus = DB::select('select distinct training_menu_id, name from training_results, training_menus where training_results.training_menu_id=training_menus.id and training_results.date = (select max(date) from training_results)');
         $latest_training_result = TrainingResult::latest('date')->first();
+        $training_dates = DB::select('select distinct date from training_results');
 
-        return view('web.index', compact('training_menus', 'training_results','distinct_training_menus','latest_training_result'));
+        return view('web.index', compact('training_menus', 'training_results','distinct_training_menus','latest_training_result', 'training_dates'));
     }
 
 }

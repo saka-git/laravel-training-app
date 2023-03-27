@@ -51,6 +51,9 @@
       </div>
       <div id="calendar"></div>
     </div>
+    <script>
+      let trainingResults = @json($training_results);
+    </script>
 
     <div id="myChart">
       <canvas id="myChart1"></canvas>

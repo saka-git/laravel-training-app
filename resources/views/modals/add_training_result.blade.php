@@ -15,7 +15,7 @@
         @csrf
         <div class="modal-body">
           <div id="training-result-form">
-            <input type="date" name="date">
+            <input type="date" name="date" value="<?php echo date('Y-m-j');?>">
             <label>トレーニングカテゴリ</label>
             <select class="form-select mb-3" name="training_menu_id">
               @foreach ($training_menus as $training_menu)

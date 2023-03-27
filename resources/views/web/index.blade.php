@@ -45,6 +45,10 @@
         </div>
         <div id="calendar"></div>
       </div>
+      <script>
+        let trainingDates = @json($training_dates);
+      </script>
+  
     </div>
   </div>
 

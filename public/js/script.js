@@ -65,6 +65,13 @@ const createCalendar = (date) => {
     document.querySelector("#calendar").innerHTML = calendar;
 };
 
+const formatYYYYMMDD = (year, month, day) => {
+    if (!year || !month || !day) return;
+    return `${year}-${month.toString().padStart(2, "0")}-${day
+        .toString()
+        .padStart(2, "0")}`;
+};
+
 window.onload = () => {
     createCalendar(today);
 };
@@ -99,14 +106,23 @@ const createTable = (year, month) => {
             } else {
                 count++;
 
-                if (
+                // TODO:  atodesakuzyooytei
+                const todayBkColorFlg =
                     year == today.getFullYear() &&
                     month == today.getMonth() &&
-                    count == today.getDate()
-                ) {
-                    calendar += "<td class='today'>" + count + "</td>";
+                    count == today.getDate();
+
+                const isTrainingExec = trainingDates.some(
+                    (training) =>
+                        training.date === formatYYYYMMDD(year, month + 1, count)
+                );
+
+                if (todayBkColorFlg) {
+                    calendar += `<td class="today"><a href=#>${count}</a></td>`;
+                } else if (isTrainingExec) {
+                    calendar += `<td class="traing-exec-calendar"><a href=#>${count}</a></td>`;
                 } else {
-                    calendar += "<td>" + count + "</td>";
+                    calendar += `<td><a href=#>${count}</a></td>`;
                 }
             }
         }
