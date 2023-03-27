@@ -1,6 +1,6 @@
 import Chart from "chart.js/auto";
 
-const ctx = document.getElementById("myChart").getContext("2d");
+const ctx = document.getElementById("myChart1").getContext("2d");
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 const data = {
