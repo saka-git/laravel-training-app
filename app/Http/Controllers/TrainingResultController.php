@@ -30,18 +30,22 @@ class TrainingResultController extends Controller
         // グラフ用データ
         $twoweeks_max_results = DB::select('select max(weight), date from training_results where date between date_sub(now(), interval 2 week) and now() group by date');
         $twoweeks_total_results = DB::select('select sum(weight * rep) as sum, date from training_results where date between date_sub(now(), interval 2 week) and now() group by date');
-
-        $today = new DateTime(); // 今日の日付を取得
-        $two_weeks_ago = new DateTime('-2 weeks'); // 2週間前の日付を取得
-        $date_range = array(); // 空の配列を作成
-
+        
         // 2週間前から今日までの日付をループで処理して配列に追加
-        for ($i = $two_weeks_ago; $i <= $today; $i->modify('+1 day')) {
-            $date_range[] = $i->format('Y-m-d');
+        $date_range = array(); // 空の配列を作成
+        $graph_day_range = GlobalConst::GRAPH_DAY_RANGE;
+        $strtotime_day = $graph_day_range - 1;
+        $start_ymd = date('Y-m-d', strtotime("-{$strtotime_day} day"));
+        for($i=0; $i<$graph_day_range; $i++) {
+            $date_range[] = date('Y-m-d', strtotime("+{$i} day", strtotime($start_ymd)));
         }
 
+        // カレンダー→トレーニングリザルトのデータ取得
+        $distinct_training_all_menus = DB::select('select distinct training_menu_id, name, date from training_results, training_menus where training_results.training_menu_id=training_menus.id');
 
-        return view('training.index', compact('training_categories', 'training_menus', 'training_results', 'training_dates','twoweeks_max_results','twoweeks_total_results', 'date_range'));
+
+
+        return view('training.index', compact('training_categories', 'training_menus', 'training_results', 'training_dates','twoweeks_max_results','twoweeks_total_results', 'date_range', 'distinct_training_all_menus'));
     }
 
     /**

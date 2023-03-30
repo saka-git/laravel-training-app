@@ -59,6 +59,10 @@
       <div id="calendar"></div>
     </div>
 
+    <!-- トレーニング結果（カード）javascriptで追加 -->
+    <div id="training-card">
+    </div>
+
     <!-- グラフ -->
     <div id="myChart" style="max-width:900px;max-height:450px;">
       <canvas id="myChart1"></canvas>
@@ -66,10 +70,17 @@
 
     <!-- データ渡す用スクリプト -->
     <script>
+      //カレンダー
       const trainingDates = @json($training_dates);
+      //カレンダー→トレーニングリザルト
+      const trainingResults = @json($training_results);
+      const distinctTrainingAllMenus = @json($distinct_training_all_menus);
+
+      //グラフ
       const trainingMaxResults = @json($twoweeks_max_results);
       const trainingTotalResults = @json($twoweeks_total_results);
       const dateRange = @json($date_range);
+      
     </script>
   </div>
   
@@ -104,6 +115,7 @@
     <div id="myChart" style="max-width:900px;max-height:450px;">
       <canvas id="myChart1"></canvas>
     </div>
+
     
   </div>
   @endforeach

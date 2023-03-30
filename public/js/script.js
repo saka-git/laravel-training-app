@@ -106,22 +106,37 @@ const createTable = (year, month) => {
             } else {
                 count++;
 
-                const todayBkColorFlg =
-                    year == today.getFullYear() &&
-                    month == today.getMonth() &&
-                    count == today.getDate();
+                //TODO: カレンダ-の本日のbackground colorを無効
+                // const todayBkColorFlg =
+                //     year == today.getFullYear() &&
+                //     month == today.getMonth() &&
+                //     count == today.getDate();
 
                 const isTrainingExec = trainingDates.some(
                     (training) =>
                         training.date === formatYYYYMMDD(year, month + 1, count)
                 );
 
-                if (todayBkColorFlg) {
-                    calendar += `<td class="today"><a href=#>${count}</a></td>`;
-                } else if (isTrainingExec) {
-                    calendar += `<td class="traing-exec-calendar"><a href=#>${count}</a></td>`;
+                // if (todayBkColorFlg) {
+                //     calendar += `<td class="today"><a href="#" data-date="${formatYYYYMMDD(
+                //         year,
+                //         month + 1,
+                //         count
+                //     )}" onClick="result_display(event);">${count}</a></td>`;
+                // }
+                if (isTrainingExec) {
+                    calendar += `<td class="traing-exec-calendar"><a href="#" data-date="${formatYYYYMMDD(
+                        year,
+                        month + 1,
+                        count
+                    )}" onClick="result_display(event);">${count}</a></td>`;
                 } else {
-                    calendar += `<td><a href=#>${count}</a></td>`;
+                    // ()の中に何入れればいい？
+                    calendar += `<td><a href="#" data-date="${formatYYYYMMDD(
+                        year,
+                        month + 1,
+                        count
+                    )}" onClick="result_display(event);">${count}</a></td>`;
                 }
             }
         }
@@ -130,3 +145,43 @@ const createTable = (year, month) => {
 
     return calendar;
 };
+
+console.log("result", trainingResults);
+console.log("menu", distinctTrainingAllMenus);
+
+// カレンダークリックした時、その日のトレーニング内容を表示
+const result_display = (event) => {
+    const date = event.target.getAttribute("data-date");
+    // TODO filterの括弧内のエレメントの意味
+    const thatDayTrainingResults = trainingResults.filter(
+        (training) => training.date === date
+    );
+    const thatDayTrainingMenu = distinctTrainingAllMenus.filter(
+        (training) => training.date === date
+    );
+    console.log("resultthatday", thatDayTrainingResults);
+    console.log("menuthatday", thatDayTrainingMenu);
+
+    for (const thatDayTrainingMenu in thatDayTrainingMenus) {
+        const trainingResultCard = `<div class="row"><div class="card col-3" style="width: 18rem;"><div class="card-header">${thatDayTrainingMenu.name}</div><ul class="list-group list-group-flush"></ul></div></div>`;
+        $("#training-card").append(trainingResultCard);
+        console.log(name);
+    }
+};
+
+//     `<div class="row">
+//         @foreach ($distinct_training_menus as $distinct_training_menu)
+//           <div class="card col-3" style="width: 18rem;">
+//             <div class="card-header">
+//               {{ $distinct_training_menu->name }}
+//             </div>
+//             <ul class="list-group list-group-flush">
+//               @foreach ($training_results as $training_result)
+//                 @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)
+//                   <li class="list-group-item">{{ $training_result->weight }}kg×{{ $training_result->rep }}回</li>
+//                 @endif
+//               @endforeach
+//             </ul>
+//           </div>
+//         @endforeach
+//       </div>`
