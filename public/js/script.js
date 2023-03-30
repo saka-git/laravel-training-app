@@ -106,7 +106,6 @@ const createTable = (year, month) => {
             } else {
                 count++;
 
-                // TODO:  atodesakuzyooytei
                 const todayBkColorFlg =
                     year == today.getFullYear() &&
                     month == today.getMonth() &&

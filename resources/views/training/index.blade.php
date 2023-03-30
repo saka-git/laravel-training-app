@@ -5,6 +5,8 @@
 @include('modals.add_training_result')
 <!-- トレーニングメニュー追加用モーダル -->
 @include('modals.add_training_menu')
+
+<!-- タブ -->
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <button
@@ -37,12 +39,17 @@
   </li>
   @endforeach
 </ul>
+
+<!-- タブ中身All -->
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+    <!-- カレンダーグラフ切り替えボタン -->
     <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" checked onClick="calendarBtnAction()">
       <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
     <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off" onClick="chartBtnAction()">
       <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
+
+    <!-- カレンダー -->
     <div id="myCalendar" class="wrapper">
       <h1 id="header"></h1>
       <div id="next-prev-button">
@@ -51,15 +58,22 @@
       </div>
       <div id="calendar"></div>
     </div>
-    <script>
-      let trainingResults = @json($training_results);
-    </script>
 
-    <div id="myChart">
+    <!-- グラフ -->
+    <div id="myChart" style="max-width:900px;max-height:450px;">
       <canvas id="myChart1"></canvas>
     </div>
+
+    <!-- データ渡す用スクリプト -->
+    <script>
+      const trainingDates = @json($training_dates);
+      const trainingMaxResults = @json($twoweeks_max_results);
+      const trainingTotalResults = @json($twoweeks_total_results);
+      const dateRange = @json($date_range);
+    </script>
   </div>
   
+  <!-- タブ中身カテゴリー -->
   @foreach ($training_categories as $training_category)
   <div class="tab-pane fade" id="pills-{{ $training_category->id }}" role="tabpanel" aria-labelledby="pills-{{ $training_category->id }}-tab">
     <input type="radio" class="btn-check" name="training-{{ $training_category->id }}" id="option-{{ $training_category->id }}-all" autocomplete="off" checked>
@@ -70,6 +84,27 @@
       <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}-{{ $training_menu->id }}">{{ $training_menu->name }}</label>
     @endif
     @endforeach
+    <div>
+      <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" checked onClick="calendarBtnAction()">
+        <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
+      <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off" onClick="chartBtnAction()">
+        <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
+    </div>
+    <!-- カレンダー -->
+    <div id="myCalendar" class="wrapper">
+      <h1 id="header"></h1>
+      <div id="next-prev-button">
+        <button id="prev" onclick="prev()">‹</button>
+        <button id="next" onclick="next()">›</button>
+      </div>
+      <div id="calendar"></div>
+    </div>
+      
+    <!-- グラフ -->
+    <div id="myChart" style="max-width:900px;max-height:450px;">
+      <canvas id="myChart1"></canvas>
+    </div>
+    
   </div>
   @endforeach
 </div>

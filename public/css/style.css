@@ -47,6 +47,9 @@ td.today {
     background-color: #d65e72;
     color: #fff;
 }
+.traing-exec-calendar {
+    background-color: bisque;
+}
 #next-prev-button {
     position: relative;
 }

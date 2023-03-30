@@ -45,8 +45,10 @@
         </div>
         <div id="calendar"></div>
       </div>
+      <!-- TODO const letどっち？  -->
       <script>
-        let trainingDates = @json($training_dates);
+        const trainingDates = @json($training_dates);
+
       </script>
   
     </div>

@@ -1,23 +1,50 @@
 import Chart from "chart.js/auto";
 
-const ctx = document.getElementById("myChart1").getContext("2d");
+// aとbの配列を結合
+const result = [];
+for (const date of dateRange) {
+    const objMax = trainingMaxResults.find((obj) => obj.date === date) || null;
+    const objTotal =
+        trainingTotalResults.find((obj) => obj.date === date) || null;
+    result.push({ date, ...objMax, ...objTotal });
+}
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+// YYYY-mm-ddからmm-ddへ変更
+const formattedDates = dateRange.map((dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month.toString().padStart(2, "0")}-${day
+        .toString()
+        .padStart(2, "0")}`;
+});
+
+// グラフのデータ
+const ctx = document.getElementById("myChart1").getContext("2d");
+const labels = formattedDates;
+
+// 結合されたデータからsumとmaxを抽出、データに代入
+const data1 = result.map((item) => item["sum"]);
+const data2 = result.map((item) => item["max(weight)"]);
+
 const data = {
     labels: labels,
     datasets: [
         {
-            label: "Dataset 1",
-            data: [20, 35, 40, 30, 45, 35, 40],
-            borderColor: "#f88",
-            backgroundColor: "#8f8",
+            label: "総負荷量",
+            data: data1,
+            borderColor: "rgba(54,164,235,0.8)",
+            backgroundColor: "rgba(54,164,235,0.5)",
+            yAxisID: "y1",
             order: 1,
         },
         {
-            label: "Dataset 2",
-            data: [20, 15, 30, 25, 30, 40, 35],
-            borderColor: "#484",
-            backgroundColor: "#ffdab9",
+            label: "Max",
+            data: data2,
+            borderColor: "rgba(254,97,132,0.8)",
+            backgroundColor: "rgba(254,97,132,0.5)",
+            spanGaps: true,
+            yAxisID: "y2",
             type: "line",
             order: 0,
         },
@@ -34,7 +61,20 @@ const myChart = new Chart(ctx, {
             },
             title: {
                 display: true,
-                text: "Chart.js Combined Line/Bar Chart",
+                text: "総負荷量、Maxグラフ",
+            },
+        },
+        scales: {
+            y1: {
+                type: "linear",
+                position: "left",
+            },
+            y2: {
+                type: "linear",
+                position: "right",
+                gridLines: {
+                    drawOnChartArea: false,
+                },
             },
         },
     },
