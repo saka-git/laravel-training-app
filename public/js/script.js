@@ -151,21 +151,30 @@ console.log("menu", distinctTrainingAllMenus);
 
 // カレンダークリックした時、その日のトレーニング内容を表示
 const result_display = (event) => {
+    // 以前に生成されたカードを削除
+    $("#training-card").empty();
+
     const date = event.target.getAttribute("data-date");
     // TODO filterの括弧内のエレメントの意味
     const thatDayTrainingResults = trainingResults.filter(
         (training) => training.date === date
     );
-    const thatDayTrainingMenu = distinctTrainingAllMenus.filter(
+    const thatDayTrainingMenus = distinctTrainingAllMenus.filter(
         (training) => training.date === date
     );
-    console.log("resultthatday", thatDayTrainingResults);
-    console.log("menuthatday", thatDayTrainingMenu);
 
-    for (const thatDayTrainingMenu in thatDayTrainingMenus) {
-        const trainingResultCard = `<div class="row"><div class="card col-3" style="width: 18rem;"><div class="card-header">${thatDayTrainingMenu.name}</div><ul class="list-group list-group-flush"></ul></div></div>`;
+    for (let i = 0; i < thatDayTrainingMenus.length; i++) {
+        const trainingResultCard = `<div class="row"><div class="card col-3" style="width: 18rem;"><div class="card-header">${thatDayTrainingMenus[i].name}</div><ul id="training-card-list${i}" class="list-group list-group-flush"></ul></div></div>`;
         $("#training-card").append(trainingResultCard);
-        console.log(name);
+        for (let j = 0; j < thatDayTrainingResults.length; j++) {
+            if (
+                thatDayTrainingMenus[i].training_menu_id ===
+                thatDayTrainingResults[j].training_menu_id
+            ) {
+                const thatDayTrainingResult = `<li class="list-group-item">${thatDayTrainingResults[j].weight}kg×${thatDayTrainingResults[j].rep}回</li>`;
+                $("#training-card-list" + i).append(thatDayTrainingResult);
+            }
+        }
     }
 };
 
