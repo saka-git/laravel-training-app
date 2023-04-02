@@ -21,7 +21,10 @@ use App\Http\Controllers\ChartController;
 Route::get('/',  [WebController::class, 'index']);
 
 Route::resource('menus', TrainingMenuController::class)->only(['store'])->middleware('auth');
-Route::resource('training', TrainingResultController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
+
+// TODO: どういうルーティングがいいか？
+Route::resource('training_results', TrainingResultController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
+// Route::delete('/training/{training_result}', [TrainingResultController::class, 'destroy'])->name('training.destroy');
 
 
 Auth::routes();
@@ -30,8 +33,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // チャートデータ取得処理
 Route::get('/chart-get', [ChartController::class, 'chartGet'])->name('chart-get');
-
-/* chart.js用お試し　後で削除 */
-Route::get('/chartjs', function () {
-    return view('chartjs');
-});

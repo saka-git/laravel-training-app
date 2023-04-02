@@ -6,7 +6,7 @@
     <div class="col-2">
       <div>
         <ul>
-          <li><a href="{{ route('training.index') }}">Training</a></li>
+          <li><a href="{{ route('training_results.index') }}">Training</a></li>
           <li><a>その他</a></li>
         </ul>
       </div>
@@ -29,8 +29,24 @@
             </div>
             <ul class="list-group list-group-flush">
               @foreach ($training_results as $training_result)
+                <!-- トレーニングリザルトの編集用モーダル -->
+                @include('modals.edit_training_result') 
+                <!-- トレーニングリザルトの削除用モーダル -->
+                @include('modals.delete_training_result')
+                
                 @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)
-                  <li class="list-group-item">{{ $training_result->weight }}kg×{{ $training_result->rep }}回</li>
+                  <li class="list-group-item">{{ $training_result->weight }}kg×{{ $training_result->rep }}回
+                    <div class="d-flex align-items-center">                                 
+                      <div class="dropdown">
+                          <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none" id="dropdownGoalMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                          <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownGoalMenuLink">
+                              <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTrainingResultModal{{ $training_result->id }}">編集</a></li>                                   
+                              <div class="dropdown-divider"></div>
+                              <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteTrainingResultModal{{ $training_result->id }}">削除</a></li>                                                                                                          
+                          </ul>
+                      </div>
+                    </div>
+                  </li>
                 @endif
               @endforeach
             </ul>

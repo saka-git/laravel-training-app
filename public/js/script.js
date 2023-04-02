@@ -2,23 +2,25 @@ $(function () {
     //トレーニングリザルトのset追加の処理
     $("#add-set-button").on("click", function () {
         const formCount = $("input").length + 1;
-        const newSet =
-            `
-          <label>` +
-            formCount +
-            `set目</label>
-          <div>
-            <div class="input-group mb-3">
-              <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight">
-              <span class="input-group-text" id="weight">kg</span>
+        const newSet = `
+            <input type="date" name="date[]" value="<?php echo date('Y-m-d');?>">
+            <select class="form-select mb-3" name="training_menu_id[]">
+                <option value="5">チェストフライ</option>
+            </select>
+            <label>set目</label>
+            <div>
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
+                    <span class="input-group-text" id="weight">kg</span>
+                </div>
+                <div>×</div>
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
+                    <span class="input-group-text" id="rep">回</span>
+                </div>
             </div>
-            <div>×</div>
-            <div class="input-group mb-3">
-              <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep">
-              <span class="input-group-text" id="rep">回</span>
-            </div>
-          </div>
-        `;
+            <input type="hidden" name="num[]">
+            `;
         $("#training-result-form").append(newSet);
     });
 
@@ -129,14 +131,14 @@ const createTable = (year, month) => {
                         year,
                         month + 1,
                         count
-                    )}" onClick="result_display(event);">${count}</a></td>`;
+                    )}" onClick="result_display(event);return false;">${count}</a></td>`;
                 } else {
                     // ()の中に何入れればいい？
                     calendar += `<td><a href="#" data-date="${formatYYYYMMDD(
                         year,
                         month + 1,
                         count
-                    )}" onClick="result_display(event);">${count}</a></td>`;
+                    )}" onClick="result_display(event);return false;">${count}</a></td>`;
                 }
             }
         }
@@ -177,20 +179,3 @@ const result_display = (event) => {
         }
     }
 };
-
-//     `<div class="row">
-//         @foreach ($distinct_training_menus as $distinct_training_menu)
-//           <div class="card col-3" style="width: 18rem;">
-//             <div class="card-header">
-//               {{ $distinct_training_menu->name }}
-//             </div>
-//             <ul class="list-group list-group-flush">
-//               @foreach ($training_results as $training_result)
-//                 @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)
-//                   <li class="list-group-item">{{ $training_result->weight }}kg×{{ $training_result->rep }}回</li>
-//                 @endif
-//               @endforeach
-//             </ul>
-//           </div>
-//         @endforeach
-//       </div>`
