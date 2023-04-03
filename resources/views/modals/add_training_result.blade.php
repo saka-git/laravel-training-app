@@ -15,25 +15,27 @@
         @csrf
         <div class="modal-body">
           <div id="training-result-form">
-            <input type="date" name="date[]" value="<?php echo date('Y-m-d');?>">
-            <label>トレーニングカテゴリ</label>
-            <select class="form-select mb-3" name="training_menu_id[]">
-              @foreach ($training_menus as $training_menu)
-              <option value="{{ $training_menu->id }}">{{ $training_menu->name }}</option>
-              @endforeach
-            </select>
-            <label>1set目</label>
-            <div clqss="row w-100">
-              <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
-                <span class="input-group-text" id="weight">kg</span>
+            <div>
+              <input type="date" name="date[]" value="<?php echo date('Y-m-d');?>">
+              <label>トレーニングカテゴリ</label>
+              <select class="form-select mb-3" name="training_menu_id[]">
+                @foreach ($training_menus as $training_menu)
+                <option value="{{ $training_menu->id }}">{{ $training_menu->name }}</option>
+                @endforeach
+              </select>
+              <label>1set目</label>
+              <div clqss="row w-100">
+                <div class="input-group mb-3">
+                  <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
+                  <span class="input-group-text" id="weight">kg</span>
+                </div>
+                <div>×</div>
+                <div class="input-group mb-3">
+                  <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
+                  <span class="input-group-text" id="rep">回</span>
+                </div>
+                <input type="hidden" name="num[]" class="number">
               </div>
-              <div>×</div>
-              <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
-                <span class="input-group-text" id="rep">回</span>
-              </div>
-              <input type="hidden" name="num[]">
             </div>
           </div>
           <button type="button" class="btn btn-primary" id="add-set-button">＋ set</button>
