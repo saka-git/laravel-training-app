@@ -28,7 +28,7 @@
   <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">
     <label class="btn btn-outline-primary" for="option-all">All</label>
   @foreach ($training_categories as $training_category)
-  <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction()">
+  <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction(event)" category="{{ $training_category->id }}">
     <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}">{{ $training_category->name }}</label>
   @endforeach
   <!-- トレーニングメニューをjavascriptで追加 -->

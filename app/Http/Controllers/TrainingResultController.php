@@ -25,7 +25,7 @@ class TrainingResultController extends Controller
         $training_results = TrainingResult::all();
 
         // カレンダー用データ
-        $training_dates = DB::select('select distinct date from training_results');
+        $training_dates = DB::select('select distinct date, training_menu_id as menu_id, training_category_id as category_id from training_results, training_menus where training_results.training_menu_id=training_menus.id');
 
         // グラフ用データ
         $twoweeks_max_results = DB::select('select max(weight), date from training_results where date between date_sub(now(), interval 2 week) and now() group by date');
@@ -110,8 +110,7 @@ class TrainingResultController extends Controller
      */
     public function update(Request $request, TrainingResult $training_result)
     {
-        // TODO update上手くいかない
-        // dd($request->all());
+        
         $training_result->user_id = Auth::user()->id;
         $training_result->training_menu_id = $request->input('training_menu_id');
         $training_result->weight = $request->input('weight');

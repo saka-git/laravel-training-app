@@ -1,3 +1,7 @@
+let year;
+let month;
+const trainingAllDates = trainingDates;
+
 $(function () {
     //トレーニングリザルトのset追加の処理
     $("#add-set-button").on("click", function () {
@@ -72,8 +76,8 @@ const next = () => {
 };
 
 const createCalendar = (date) => {
-    let year = date.getFullYear();
-    let month = date.getMonth();
+    year = date.getFullYear();
+    month = date.getMonth();
     document.querySelector("#header").innerHTML =
         year + "年" + (month + 1) + "月";
 
@@ -94,7 +98,7 @@ window.onload = () => {
 
 const week = ["日", "月", "火", "水", "木", "金", "土"];
 
-const createTable = (year, month) => {
+const createTable = (year, month, trainingData = trainingAllDates) => {
     let calendar = "<table><tr class='dayOfWeek'>";
     for (let i = 0; i < week.length; i++) {
         calendar += "<th>" + week[i] + "</th>";
@@ -129,7 +133,7 @@ const createTable = (year, month) => {
                 //     count == today.getDate();
 
                 // トレーニングしたフラグ
-                const isTrainingExec = trainingDates.some(
+                const isTrainingExec = trainingData.some(
                     (training) =>
                         training.date === formatYYYYMMDD(year, month + 1, count)
                 );
@@ -197,27 +201,84 @@ const allBtnAction = () => {
     $("#btn-training-menu").empty();
 };
 
-// training-menuのタブ作成
+// トレーニングカテゴリボタンのクリック時、タブ作成、カレンダーとグラフのソート
 const trainingCategoryBtnAction = () => {
     $("#btn-training-menu").empty();
-    var checkedTrainingCategory = $(
+    let checkedTrainingCategory = $(
         'input[name="training-categories"]:checked'
     ).val();
     const btnTrainingMenuAll = `  
-        <input type="radio" class="btn-check" name="training-menus" id="option-${checkedTrainingCategory}-all" value="all" autocomplete="off" checked onClick="">
+        <input type="radio" class="btn-check" name="training-menus" id="option-${checkedTrainingCategory}-all" value="all" autocomplete="off" checked onClick="trainingMenuBtnAction()">
         <label class="btn btn-outline-primary" for="option-${checkedTrainingCategory}-all">All</label>
         `;
     $("#btn-training-menu").append(btnTrainingMenuAll);
 
-    console.log(checkedTrainingCategory);
+    // TODO:console.log(sortTrainingCategoryMenu(1, 7));
+    let calendar = createTable(
+        year,
+        month,
+        sortTrainingCategoryMenu(checkedTrainingCategory)
+    );
+    document.querySelector("#calendar").innerHTML = calendar;
+
+    // console.log(checkedTrainingCategory);
     for (let i = 0; i < trainingMenus.length; i++) {
         if (trainingMenus[i].training_category_id == checkedTrainingCategory) {
             // TODO: onclick内未記述
             const btnTrainingMenu = `  
-                <input type="radio" class="btn-check" name="training-menus" id="option-${trainingMenus[i].training_category_id}-${trainingMenus[i].id}" value="${trainingMenus[i].id}" autocomplete="off" onClick="">
+                <input type="radio" class="btn-check" name="training-menus" id="option-${trainingMenus[i].training_category_id}-${trainingMenus[i].id}" value="${trainingMenus[i].id}" autocomplete="off" onClick="trainingMenuBtnAction()">
                 <label class="btn btn-outline-primary" for="option-${trainingMenus[i].training_category_id}-${trainingMenus[i].id}">${trainingMenus[i].name}</label>
             `;
             $("#btn-training-menu").append(btnTrainingMenu);
         }
     }
 };
+
+// トレーニングメニューボタンのクリック時、カレンダーとグラフのソート
+const trainingMenuBtnAction = () => {
+    let checkedTrainingCategory = $(
+        'input[name="training-categories"]:checked'
+    ).val();
+
+    let checkedTrainingMenu = $('input[name="training-menus"]:checked').val();
+
+    if (checkedTrainingMenu == "all") {
+        let calendar = createTable(
+            year,
+            month,
+            sortTrainingCategoryMenu(checkedTrainingCategory)
+        );
+        document.querySelector("#calendar").innerHTML = calendar;
+    } else {
+        let calendar = createTable(
+            year,
+            month,
+            sortTrainingCategoryMenu(
+                checkedTrainingCategory,
+                checkedTrainingMenu
+            )
+        );
+        document.querySelector("#calendar").innerHTML = calendar;
+    }
+};
+
+// カレンダーのソート機能関数
+const sortTrainingCategoryMenu = (category_id = 0, menu_id = 0) => {
+    if (category_id && menu_id) {
+        return trainingAllDates.filter((date) => {
+            if (date.category_id == category_id && date.menu_id == menu_id) {
+                return date;
+            }
+        });
+    } else if (category_id) {
+        return trainingAllDates.filter((date) => {
+            if (date.category_id == category_id) {
+                return date;
+            }
+        });
+    }
+
+    return {};
+};
+
+console.log(`trainingDates`, trainingDates);
