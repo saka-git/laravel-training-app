@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@push('styles')
+{{-- TODO: cdn最新だとimportが記述してあり、エラー --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
+@endpush
+
 @section('content')
 <!-- データ渡す用スクリプト -->
 <script>
@@ -15,6 +20,10 @@
   const trainingMaxResults = @json($twoweeks_max_results);
   const trainingTotalResults = @json($twoweeks_total_results);
   const dateRange = @json($date_range);
+  const trainingMaxMenuResults = @json($twoweeks_max_menu_results);
+  const trainingTotalMenuResults = @json($twoweeks_total_menu_results);
+  const trainingMaxCategoryResults = @json($twoweeks_max_category_results);
+  const trainingTotalCategoryResults = @json($twoweeks_total_category_results);
 
 </script>
 <!-- トレーニング追加用モーダル -->
@@ -24,11 +33,10 @@
 
 <!-- タブ -->
 <div>
-  {{-- TODO: オンクリックの関数名 --}}
   <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">
     <label class="btn btn-outline-primary" for="option-all">All</label>
   @foreach ($training_categories as $training_category)
-  <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction(event)" category="{{ $training_category->id }}">
+  <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction()">
     <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}">{{ $training_category->name }}</label>
   @endforeach
   <!-- トレーニングメニューをjavascriptで追加 -->
@@ -59,28 +67,5 @@
 <div id="myChart" style="max-width:900px;max-height:450px;">
   <canvas id="myChart1"></canvas>
 </div>
-
-
-
-  <!-- タブ中身カテゴリー -->
-  {{-- @foreach ($training_categories as $training_category)
-  <div class="tab-pane fade" id="pills-{{ $training_category->id }}" role="tabpanel" aria-labelledby="pills-{{ $training_category->id }}-tab">
-    <input type="radio" class="btn-check" name="training-{{ $training_category->id }}" id="option-{{ $training_category->id }}-all" autocomplete="off" checked>
-      <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}-all">All</label>
-    @foreach ($training_menus as $training_menu)
-    @if ($training_menu->training_category_id === $training_category->id)  
-    <input type="radio" class="btn-check" name="training-{{ $training_category->id }}" id="option-{{ $training_category->id }}-{{ $training_menu->id }}" autocomplete="off">
-      <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}-{{ $training_menu->id }}">{{ $training_menu->name }}</label>
-    @endif
-    @endforeach
-    <div>
-      <input type="radio" class="btn-check" name="options" id="option-all-calendar" autocomplete="off" onClick="calendarBtnAction()" checked>
-        <label class="btn btn-outline-primary" for="option-all-calendar">カレンダー</label>
-      <input type="radio" class="btn-check" name="options" id="option-all-graph" autocomplete="off" onClick="chartBtnAction()">
-        <label class="btn btn-outline-primary" for="option-all-graph">グラフ</label>
-    </div>
-  </div>
-  @endforeach --}}
-
 
 @endsection
