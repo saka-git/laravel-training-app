@@ -31,6 +31,13 @@
 <!-- トレーニングメニュー追加用モーダル -->
 @include('modals.add_training_menu')
 
+@foreach ($training_results as $training_result)
+<!-- トレーニングリザルトの編集用モーダル -->
+@include('modals.edit_training_result') 
+<!-- トレーニングリザルトの削除用モーダル -->
+@include('modals.delete_training_result')
+@endforeach
+
 <!-- タブ -->
 <div>
   <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">

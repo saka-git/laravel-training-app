@@ -244,7 +244,19 @@ const resultDisplay = (event) => {
                 thatDayTrainingMenus[i].training_menu_id ===
                 thatDayTrainingResults[j].training_menu_id
             ) {
-                const thatDayTrainingResult = `<li class="list-group-item">${thatDayTrainingResults[j].weight}kg×${thatDayTrainingResults[j].rep}回</li>`;
+                const thatDayTrainingResult = `
+                <li class="list-group-item">${thatDayTrainingResults[j].weight}kg×${thatDayTrainingResults[j].rep}回
+                    <div class="d-flex align-items-center">                                 
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none menu-icon" id="dropdownResultLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">︙</a>
+                            <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownResultLink">
+                                <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTrainingResultModal${thatDayTrainingResults[j].id}">編集</a></li>                                   
+                                <div class="dropdown-divider"></div>
+                                <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteTrainingResultModal${thatDayTrainingResults[j].id}">削除</a></li>                                                                                                          
+                            </ul>
+                        </div>
+                    </div>
+                </li>`;
                 $("#training-card-list" + i).append(thatDayTrainingResult);
             }
         }

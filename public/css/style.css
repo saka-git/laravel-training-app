@@ -1,3 +1,8 @@
+/* 編集削除ボタン */
+.menu-icon::after {
+    display: none;
+}
+
 /* グラフを初期状態非表示 */
 #myChart {
     display: none;
