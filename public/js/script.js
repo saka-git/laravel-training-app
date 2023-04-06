@@ -4,7 +4,7 @@ const trainingAllDates = trainingDates;
 
 //トレーニングリザルトのset追加の処理
 $("#add-set-button").on("click", function () {
-    const formCount = $(".number").length + 1;
+    const setCount = $(".number").length + 1;
     let options = "";
     for (let i = 0; i < trainingMenus.length; i++) {
         options += `<option value="${trainingMenus[i].id}">${trainingMenus[i].name}</option>`;
@@ -25,8 +25,8 @@ $("#add-set-button").on("click", function () {
                 </select>
             </div>
             <div style="display:flex">
-                <label style="margin:0 auto" class="d-flex align-items-center">` +
-        formCount +
+                <label style="margin:0 auto" class="set-count d-flex align-items-center">` +
+        setCount +
         `set目</label>
                 <div class="input-group mt-2 mb-2" style="width:40%">
                     <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
@@ -47,6 +47,10 @@ $("#add-set-button").on("click", function () {
 //setを減らす
 const removeSet = (target) => {
     target.parentNode.parentNode.remove();
+    let setCountLabel = document.getElementsByClassName("set-count");
+    for (let i = 0; i < setCountLabel.length; i++) {
+        setCountLabel[i].textContent = i + 1 + "set目";
+    }
 };
 
 // カレンダーとグラフの切り替え
@@ -244,7 +248,7 @@ const resultDisplay = (event) => {
     );
 
     for (let i = 0; i < thatDayTrainingMenus.length; i++) {
-        const trainingResultCard = `<div class="card col-3" style="width: 18rem; padding:0; margin:5px""><div class="card-header">${thatDayTrainingMenus[i].name}</div><ul id="training-card-list${i}" class="list-group list-group-flush"></ul></div>`;
+        const trainingResultCard = `<div class="card col-3" style="width: 18rem; height: max-content; padding:0; margin:5px"><div class="card-header">${thatDayTrainingMenus[i].name}</div><ul id="training-card-list${i}" class="list-group list-group-flush"></ul></div>`;
         $("#training-card").append(trainingResultCard);
         for (let j = 0; j < thatDayTrainingResults.length; j++) {
             if (
@@ -297,7 +301,7 @@ const trainingCategoryBtnAction = () => {
     ).val();
     const btnTrainingMenuAll = `  
         <input type="radio" class="btn-check" name="training-menus" id="option-${checkedTrainingCategory}-all" value="all" autocomplete="off" checked onClick="trainingMenuBtnAction()">
-        <label class="btn btn-outline-primary" for="option-${checkedTrainingCategory}-all">All</label>
+        <label class="btn btn-outline-primary mt-1" for="option-${checkedTrainingCategory}-all">All</label>
         `;
     $("#btn-training-menu").append(btnTrainingMenuAll);
 
@@ -312,7 +316,7 @@ const trainingCategoryBtnAction = () => {
         if (trainingMenus[i].training_category_id == checkedTrainingCategory) {
             const btnTrainingMenu = `  
                 <input type="radio" class="btn-check" name="training-menus" id="option-${trainingMenus[i].training_category_id}-${trainingMenus[i].id}" value="${trainingMenus[i].id}" autocomplete="off" onClick="trainingMenuBtnAction()">
-                <label class="btn btn-outline-primary" for="option-${trainingMenus[i].training_category_id}-${trainingMenus[i].id}">${trainingMenus[i].name}</label>
+                <label class="btn btn-outline-primary mt-1" for="option-${trainingMenus[i].training_category_id}-${trainingMenus[i].id}">${trainingMenus[i].name}</label>
             `;
             $("#btn-training-menu").append(btnTrainingMenu);
         }

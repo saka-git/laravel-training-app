@@ -41,10 +41,10 @@
 <!-- タブ -->
 <div>
   <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">
-    <label class="btn btn-outline-primary" for="option-all">All</label>
+    <label class="btn btn-outline-primary mt-1" for="option-all">All</label>
   @foreach ($training_categories as $training_category)
   <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction()">
-    <label class="btn btn-outline-primary" for="option-{{ $training_category->id }}">{{ $training_category->name }}</label>
+    <label class="btn btn-outline-primary mt-1" for="option-{{ $training_category->id }}">{{ $training_category->name }}</label>
   @endforeach
   <!-- トレーニングメニューをjavascriptで追加 -->
   <div id="btn-training-menu"></div>
@@ -52,9 +52,9 @@
 <!-- カレンダーグラフ切り替えボタン -->
 <div>
   <input type="radio" class="btn-check" name="changes" id="option-calendar" autocomplete="off" checked onClick="calendarBtnAction()">
-    <label class="btn btn-outline-primary" for="option-calendar">カレンダー</label>
+    <label class="btn btn-outline-primary mt-1" for="option-calendar">カレンダー</label>
   <input type="radio" class="btn-check" name="changes" id="option-graph" autocomplete="off" onClick="chartBtnAction()">
-    <label class="btn btn-outline-primary" for="option-graph">グラフ</label>
+    <label class="btn btn-outline-primary mt-1" for="option-graph">グラフ</label>
 </div>
 <div class="row">
   <!-- カレンダー -->
