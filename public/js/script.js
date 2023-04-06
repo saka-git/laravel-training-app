@@ -2,45 +2,52 @@ let year;
 let month;
 const trainingAllDates = trainingDates;
 
-$(function () {
-    //トレーニングリザルトのset追加の処理
-    $("#add-set-button").on("click", function () {
-        const formCount = $(".number").length + 1;
-        let options = "";
-        for (let i = 0; i < trainingMenus.length; i++) {
-            options += `<option value="${trainingMenus[i].id}">${trainingMenus[i].name}</option>`;
-        }
-        const newSet =
-            `
-            <div>
-                <input type="date" name="date[]" value="<?php echo date('Y-m-d');?>">
-                <select class="form-select mb-3" name="training_menu_id[]">
-                ` +
-            options +
-            `
+//トレーニングリザルトのset追加の処理
+$("#add-set-button").on("click", function () {
+    const formCount = $(".number").length + 1;
+    let options = "";
+    for (let i = 0; i < trainingMenus.length; i++) {
+        options += `<option value="${trainingMenus[i].id}">${trainingMenus[i].name}</option>`;
+    }
+    const newSet =
+        `
+        <div>
+            <div class="d-flex justify-content-between">
+                <input type="date" name="date[]">
+                <button type="button" class="btn btn-outline-danger" onClick="removeSet(this)">ー set</button>
+            </div>
+            <div class="d-flex">
+                <label style="width:fit-content; margin:5px" class="d-flex align-items-center">トレーニングメニュー</label>
+                <select class="form-select mt-2 mb-2" style="flex:1; width:auto" name="training_menu_id[]">
+                    ` +
+        options +
+        `
                 </select>
-                <label>` +
-            formCount +
-            `set目</label>
-                <div>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
-                        <span class="input-group-text" id="weight">kg</span>
-                    </div>
-                    <div>×</div>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
-                        <span class="input-group-text" id="rep">回</span>
-                    </div>
+            </div>
+            <div style="display:flex">
+                <label style="margin:0 auto" class="d-flex align-items-center">` +
+        formCount +
+        `set目</label>
+                <div class="input-group mt-2 mb-2" style="width:40%">
+                    <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
+                    <span class="input-group-text" id="weight">kg</span>
+                </div>
+                <div style="width:fit-content; margin:5px" class="d-flex align-items-center">×</div>
+                <div class="input-group mt-2 mb-2" style="width:40%">
+                    <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
+                    <span class="input-group-text" id="rep">回</span>
                 </div>
                 <input type="hidden" name="num[]" class="number">
             </div>
+        </div>
             `;
-        $("#training-result-form").append(newSet);
-    });
-
-    //add_training_resultモーダルが閉じた時リセット
+    $("#training-result-form").append(newSet);
 });
+
+//setを減らす
+const removeSet = (target) => {
+    target.parentNode.parentNode.remove();
+};
 
 // カレンダーとグラフの切り替え
 const calendarBtnAction = () => {
@@ -237,7 +244,7 @@ const resultDisplay = (event) => {
     );
 
     for (let i = 0; i < thatDayTrainingMenus.length; i++) {
-        const trainingResultCard = `<div class="row"><div class="card col-3" style="width: 18rem;"><div class="card-header">${thatDayTrainingMenus[i].name}</div><ul id="training-card-list${i}" class="list-group list-group-flush"></ul></div></div>`;
+        const trainingResultCard = `<div class="card col-3" style="width: 18rem; padding:0; margin:5px""><div class="card-header">${thatDayTrainingMenus[i].name}</div><ul id="training-card-list${i}" class="list-group list-group-flush"></ul></div>`;
         $("#training-card").append(trainingResultCard);
         for (let j = 0; j < thatDayTrainingResults.length; j++) {
             if (
@@ -245,7 +252,7 @@ const resultDisplay = (event) => {
                 thatDayTrainingResults[j].training_menu_id
             ) {
                 const thatDayTrainingResult = `
-                <li class="list-group-item">${thatDayTrainingResults[j].weight}kg×${thatDayTrainingResults[j].rep}回
+                <li class="list-group-item d-flex justify-content-between">${thatDayTrainingResults[j].weight}kg×${thatDayTrainingResults[j].rep}回
                     <div class="d-flex align-items-center">                                 
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none menu-icon" id="dropdownResultLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">︙</a>

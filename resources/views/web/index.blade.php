@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- データ渡す用スクリプト -->
+<script>
+  //タブ
+  const trainingMenus = @json($training_menus);
+</script>
   <div class="row">
     <!-- サイドバー -->
     <div class="col-2">
@@ -13,17 +18,17 @@
     </div>
     <div class="col-9">
       <div class="row d-flex justify-content-between">
-        <h5>{{ $latest_training_result->date }}のトレーニンングメニュー</h5>
         <div>
           <!-- トレーニング追加用モーダル -->
           @include('modals.add_training_result')
           <!-- パーソナルデータ追加用モーダル -->
           @include('modals.add_personal_data')       
         </div>
+        <h5 style="margin:8px">{{ $latest_training_result->date }}のトレーニンングメニュー</h5>
       </div>
       <div class="row">
         @foreach ($distinct_training_menus as $distinct_training_menu)
-          <div class="card col-3" style="width: 18rem;">
+          <div class="card col-3" style="width: 18rem; padding:0; margin:5px">
             <div class="card-header">
               {{ $distinct_training_menu->name }}
             </div>
@@ -35,7 +40,7 @@
                 @include('modals.delete_training_result')
                 
                 @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)
-                  <li class="list-group-item">{{ $training_result->weight }}kg×{{ $training_result->rep }}回
+                  <li class="list-group-item d-flex justify-content-between">{{ $training_result->weight }}kg×{{ $training_result->rep }}回
                     <div class="d-flex align-items-center">                                 
                       <div class="dropdown">
                           <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none menu-icon" id="dropdownResultLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">︙</a>

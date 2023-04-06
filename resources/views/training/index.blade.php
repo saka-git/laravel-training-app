@@ -56,18 +56,20 @@
   <input type="radio" class="btn-check" name="changes" id="option-graph" autocomplete="off" onClick="chartBtnAction()">
     <label class="btn btn-outline-primary" for="option-graph">グラフ</label>
 </div>
-<!-- カレンダー -->
-<div id="myCalendar" class="wrapper">
-  <h1 id="header"></h1>
-  <div id="next-prev-button">
-    <button id="prev" onclick="prev()">‹</button>
-    <button id="next" onclick="next()">›</button>
+<div class="row">
+  <!-- カレンダー -->
+  <div id="myCalendar" class="wrapper col-6">
+    <h1 id="header"></h1>
+    <div id="next-prev-button">
+      <button id="prev" onclick="prev()">‹</button>
+      <button id="next" onclick="next()">›</button>
+    </div>
+    <div id="calendar"></div>
   </div>
-  <div id="calendar"></div>
-</div>
 
-<!-- トレーニング結果（カード）javascriptで追加 -->
-<div id="training-card">
+  <!-- トレーニング結果（カード）javascriptで追加 -->
+  <div id="training-card" class="row col-6">
+  </div>
 </div>
 
 <!-- グラフ -->
