@@ -16,13 +16,10 @@
         <div class="modal-body">
           <div id="training-result-form">
             <div>
-              <div class="d-flex justify-content-between">
-                <input type="date" name="date[]" value="<?php echo date('Y-m-d');?>">
-                <button type="button" class="btn btn-outline-danger" onClick="removeSet(this)">ー set</button>
-              </div>
+              <input type="date" name="date[]" id="add-date" value="<?php echo date('Y-m-d');?>">
               <div class="d-flex">
                   <label style="width:fit-content; margin:5px" class="d-flex align-items-center">トレーニングメニュー</label>
-                <select class="form-select mt-2 mb-2" style="flex:1; width:auto" name="training_menu_id[]">
+                <select id="add-select" class="form-select mt-2 mb-2" style="flex:1; width:auto" name="training_menu_id[]">
                   @foreach ($training_menus as $training_menu)
                   <option value="{{ $training_menu->id }}">{{ $training_menu->name }}</option>
                   @endforeach

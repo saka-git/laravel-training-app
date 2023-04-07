@@ -71,6 +71,12 @@ class TrainingResultController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'training_menu_id' => 'required',
+            'rep' => 'required',
+            'date' => 'required',
+        ]);
+    
         $num = count($request->input('training_menu_id'));
         for ($i = 0; $i < $num; $i++) {
             $training_result = new TrainingResult();

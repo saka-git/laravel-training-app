@@ -21,8 +21,7 @@
         <div>
           <!-- トレーニング追加用モーダル -->
           @include('modals.add_training_result')
-          <!-- パーソナルデータ追加用モーダル -->
-          @include('modals.add_personal_data')       
+    
         </div>
         <h5 style="margin:8px">{{ $latest_training_result->date }}のトレーニンングメニュー</h5>
       </div>

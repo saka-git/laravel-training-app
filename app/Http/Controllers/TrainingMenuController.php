@@ -16,9 +16,14 @@ class TrainingMenuController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'training_category_id' => 'required',
+        ]);
+    
         $training_menu = new TrainingMenu();
         $training_menu->name = $request->input('name');
-        $training_menu->training_category_id	= $request->input('training_category_id');
+        $training_menu->training_category_id = $request->input('training_category_id');
         $training_menu->save();
 
         return redirect()->route('training_results.index');

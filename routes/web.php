@@ -22,9 +22,7 @@ Route::get('/',  [WebController::class, 'index']);
 
 Route::resource('menus', TrainingMenuController::class)->only(['store'])->middleware('auth');
 
-// TODO: どういうルーティングがいいか？
 Route::resource('training_results', TrainingResultController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
-// Route::delete('/training/{training_result}', [TrainingResultController::class, 'destroy'])->name('training.destroy');
 
 
 Auth::routes();
