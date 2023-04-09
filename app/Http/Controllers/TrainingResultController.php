@@ -76,15 +76,19 @@ class TrainingResultController extends Controller
             'rep' => 'required',
             'date' => 'required',
         ]);
-    
-        $num = count($request->input('training_menu_id'));
+
+        $date = $request->input('date');
+        $training_menu_id = $request->input('training_menu_id');
+
+        $num = count($request->input('rep'));
+        
         for ($i = 0; $i < $num; $i++) {
             $training_result = new TrainingResult();
             $training_result->user_id = Auth::user()->id;
-            $training_result->training_menu_id = $request->input('training_menu_id')[$i];
+            $training_result->training_menu_id = $training_menu_id;
             $training_result->weight = $request->input('weight')[$i];
             $training_result->rep = $request->input('rep')[$i];
-            $training_result->date = $request->input('date')[$i];
+            $training_result->date = $date;
             $training_result->save();
         }
         return redirect()->route('training_results.index');

@@ -9,40 +9,24 @@ $("#add-set-button").on("click", function () {
     for (let i = 0; i < trainingMenus.length; i++) {
         options += `<option value="${trainingMenus[i].id}">${trainingMenus[i].name}</option>`;
     }
-    const addDate = document.getElementById("add-date");
 
-    // const test = document.getElementById("add-date");
-    // console.log(`date`, test.value);
-    // const target = document.querySelectorAll(".add-date");
-    // console.log(target);
     const newSet =
         `
         <div>
-            <div class="d-flex justify-content-between">
-                <input type="date" name="date[]" class="add-date" value="${addDate.value}">
-                <button type="button" class="btn btn-outline-danger" onClick="removeSet(this)">ー set</button>
-            </div>
-            <div class="d-flex">
-                <label style="width:fit-content; margin:5px" class="d-flex align-items-center">トレーニングメニュー</label>
-                <select class="form-select add-select mt-2 mb-2" style="flex:1; width:auto" name="training_menu_id[]">
-                    ` +
-        options +
-        `
-                </select>
-            </div>
             <div style="display:flex">
                 <label style="margin:0 auto" class="set-count d-flex align-items-center">` +
         setCount +
         `set目</label>
-                <div class="input-group mt-2 mb-2" style="width:40%">
+                <div class="input-group mt-2 mb-2" style="width:35%">
                     <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
                     <span class="input-group-text" id="weight">kg</span>
                 </div>
                 <div style="width:fit-content; margin:5px" class="d-flex align-items-center">×</div>
-                <div class="input-group mt-2 mb-2" style="width:40%">
+                <div class="input-group mt-2 mb-2" style="width:35%">
                     <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
                     <span class="input-group-text" id="rep">回</span>
                 </div>
+                <button type="button" class="btn btn-outline-danger mt-2 mb-2 ms-2" onClick="removeSet(this)">- set</button>
                 <input type="hidden" name="num[]" class="number">
             </div>
         </div>
@@ -55,7 +39,7 @@ const removeSet = (target) => {
     target.parentNode.parentNode.remove();
     let setCountLabel = document.getElementsByClassName("set-count");
     for (let i = 0; i < setCountLabel.length; i++) {
-        setCountLabel[i].textContent = i + 2 + "set目";
+        setCountLabel[i].textContent = i + 1 + "set目";
     }
 };
 
