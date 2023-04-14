@@ -17,12 +17,10 @@
       </div>
     </div>
     <div class="col-9">
-      <div class="row d-flex justify-content-between">
-        <div>
-          <!-- トレーニング追加用モーダル -->
-          @include('modals.add_training_result')
-    
-        </div>
+      <!-- トレーニング追加用モーダル -->
+      @include('modals.add_training_result')
+      @if($latest_training_result)
+      <div>
         <h5 style="margin:8px">{{ $latest_training_result->date }}のトレーニンングメニュー</h5>
       </div>
       <div class="row">
@@ -57,6 +55,7 @@
           </div>
         @endforeach
       </div>
+      @endif
       <div class="wrapper">
         <h1 id="header"></h1>
         <div id="next-prev-button">
