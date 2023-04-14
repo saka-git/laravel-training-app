@@ -1,3 +1,8 @@
+/* 編集削除ボタン */
+.menu-icon::after {
+    display: none;
+}
+
 /* グラフを初期状態非表示 */
 #myChart {
     display: none;
@@ -46,6 +51,9 @@ td.disabled {
 td.today {
     background-color: #d65e72;
     color: #fff;
+}
+.traing-exec-calendar {
+    background-color: bisque;
 }
 #next-prev-button {
     position: relative;

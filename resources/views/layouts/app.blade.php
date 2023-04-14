@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {{-- TODO:名前スタイル変える --}}
+    @stack('styles')
+
 
 </head>
 <body style="padding: 60px 0;">

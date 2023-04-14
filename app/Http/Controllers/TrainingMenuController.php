@@ -16,22 +16,27 @@ class TrainingMenuController extends Controller
      */
     public function store(Request $request)
     {
-        $trainingMenu = new TrainingMenu();
-        $trainingMenu->name = $request->input('name');
-        $trainingMenu->training_category_id	= $request->input('training_category_id');
-        $trainingMenu->save();
+        $request->validate([
+            'name' => 'required',
+            'training_category_id' => 'required',
+        ]);
+    
+        $training_menu = new TrainingMenu();
+        $training_menu->name = $request->input('name');
+        $training_menu->training_category_id = $request->input('training_category_id');
+        $training_menu->save();
 
-        return redirect()->route('training.index');
+        return redirect()->route('training_results.index');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TrainingMenu  $trainingMenu
+     * @param  \App\Models\TrainingMenu  $training_menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TrainingMenu $trainingMenu)
+    public function update(Request $request, TrainingMenu $training_menu)
     {
         //
     }
@@ -39,10 +44,10 @@ class TrainingMenuController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TrainingMenu  $trainingMenu
+     * @param  \App\Models\TrainingMenu  $training_menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TrainingMenu $trainingMenu)
+    public function destroy(TrainingMenu $training_menu)
     {
         //
     }
