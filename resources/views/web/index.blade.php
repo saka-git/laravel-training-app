@@ -12,7 +12,7 @@
       <div>
         <ul>
           <li><a href="{{ route('training_results.index') }}">Training</a></li>
-          <li><a>その他</a></li>
+          <li><a>Group</a></li>
         </ul>
       </div>
     </div>
@@ -21,7 +21,7 @@
       @include('modals.add_training_result')
       @if($latest_training_result)
       <div>
-        <h5 style="margin:8px">{{ $latest_training_result->date }}のトレーニンングメニュー</h5>
+        <h5 style="margin:8px">{{ \Carbon\Carbon::parse($latest_training_result->date)->format('n月j日') }}のトレーニンングメニュー</h5>
       </div>
       <div class="row">
         @foreach ($distinct_training_menus as $distinct_training_menu)
