@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @push('styles')
-{{-- TODO: cdn最新だとimportが記述してあり、エラー --}}
+{{-- chart.jsのcdn読み込み --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
+@endpush
+
+{{-- jsファイル読み込み --}}
+@push('scripts')
+<script src="{{ asset('/js/training.js') }}"></script>
 @endpush
 
 @section('content')
