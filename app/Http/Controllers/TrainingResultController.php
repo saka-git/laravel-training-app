@@ -91,7 +91,7 @@ class TrainingResultController extends Controller
             $training_result->date = $date;
             $training_result->save();
         }
-        return redirect()->route('training_results.index');
+        return redirect()->back();
     }
 
     /**
@@ -133,7 +133,7 @@ class TrainingResultController extends Controller
         $training_result->date = $request->input('date');
         $training_result->update();
         
-        return redirect()->route('training_results.index');
+        return redirect()->back();
     }
 
     /**
@@ -147,6 +147,6 @@ class TrainingResultController extends Controller
 
         $training_result->delete();
         
-        return redirect()->route('training_results.index');
+        return redirect()->back();
     }
 }
