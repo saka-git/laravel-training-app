@@ -36,8 +36,12 @@
                 <!-- トレーニングリザルトの削除用モーダル -->
                 @include('modals.delete_training_result')
                 
-                @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)
-                  <li class="list-group-item d-flex justify-content-between">{{ $training_result->weight }}kg×{{ $training_result->rep }}回
+                @if ($distinct_training_menu->training_menu_id === $training_result->training_menu_id)                  
+                  <li class="list-group-item d-flex justify-content-between">
+                    @if($training_result->weight)
+                      {{ $training_result->weight }}kg×
+                    @endif
+                      {{ $training_result->rep }}回
                     <div class="d-flex align-items-center">                                 
                       <div class="dropdown">
                           <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none menu-icon" id="dropdownResultLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">︙</a>
