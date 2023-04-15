@@ -1,66 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Training-app
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Training-app は行った筋トレの内容を記録し、トレーニング結果を見ることができます。
 
-## About Laravel
+# DEMO
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![training-app](https://user-images.githubusercontent.com/123351457/232206787-9cbcaae9-a42f-4219-a881-c6a73e009e96.gif)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Training-app ではトレーニングを行った部位、メニューごとにカレンダーでわかるようになっています。
+また、直近 2 週間のトレーニング結果をグラフで見ることができます。
 
-## Learning Laravel
+# Requirement
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   php 8.0.2
+-   laravel 9.19
+-   bootstrap 5.2.3
+-   chart.js 3.5.1
+-   jquery 3.6.1
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+# Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1.リポジトリのクローン
 
-## Laravel Sponsors
+```bash
+$ git clone https://github.com/saka-git/laravel-training-app.git
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+2.ライブラリのインストール
 
-### Premium Partners
+```bash
+$ composer install
+$ npm install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+3..env ファイルの修正
 
-## Contributing
+```bash
+APP_NAME=Training-app
+DB_DATABASE=laravel_training_app
+DB_PASSWORD=root
+DB_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4.データベースの作成
 
-## Code of Conduct
+phpMyAdmin で laravel_todo_app という名前のデータベースを作成
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5.マイグレーション
 
-## Security Vulnerabilities
+```bash
+$ php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6.シーディング
 
-## License
+```bash
+$ php artisan db:seed --class=TrainingCategoriesTableSeeder
+$ php artisan db:seed --class=TrainingMenusTableSeeder
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Usage
+
+## ホームページ
+
+-   +トレーニングのボタンから行ったトレーニングを入力
+-   最新のトレーニング結果が表示される
+-   カレンダーにはトレーニングを行った日付に色がつく
+
+## Training ページ
+
+-   +トレーニングメニューからトレーニングメニューを追加できる
+-   トレーニング結果に従って、カレンダーとグラフが表示される
+-   部位やメニューを選ぶことにより、ソートすることができる
+
+# Future features
+
+-   [ ] グループ機能および共有機能
+-   [ ] グラフの期間の変更機能
+-   [ ] メニューの理論削除機能の追加
+-   [ ] materialize によるデザイン変更
+
+# Author
+
+-   作成者 坂本竜也
+-   E-mail sakamoto.tatsuya1997a@gmail.com
+
+# License
+
+"Training-app" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
