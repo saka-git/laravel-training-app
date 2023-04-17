@@ -18,7 +18,7 @@ use App\Http\Controllers\ChartController;
 |
 */
 
-Route::get('/',  [WebController::class, 'index']);
+Route::get('/',  [WebController::class, 'index'])->middleware('auth');
 
 Route::resource('menus', TrainingMenuController::class)->only(['store'])->middleware('auth');
 
