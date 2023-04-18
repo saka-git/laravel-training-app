@@ -73,3 +73,43 @@ td.today {
 #next {
     float: right;
 }
+
+/* モーダルのボタンの余白 */
+.add-result-modal {
+    margin-left: 12px;
+}
+
+/* ボタンの左の余白 */
+.btn-left {
+    margin-left: 12px;
+}
+
+/*================
+PC用のスタイル
+=================*/
+@media screen and (min-width: 768px) {
+    /* pcで表示しない */
+    .pc-hide {
+        display: none;
+    }
+}
+
+/*====================
+スマートフォン用のスタイル
+=====================*/
+@media screen and (max-width: 767px) {
+    /* サイドバー非表示 */
+    .pc-sidebar {
+        display: none;
+    }
+
+    /* 日付を中央に */
+    .latest-date {
+        text-align: center;
+    }
+
+    /* カード中央揃え */
+    .center-cards {
+        justify-content: center;
+    }
+}

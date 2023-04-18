@@ -45,25 +45,27 @@
 
 <!-- タブ -->
 <div>
-  <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">
-    <label class="btn btn-outline-primary mt-1" for="option-all">All</label>
-  @foreach ($training_categories as $training_category)
-  <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction()">
-    <label class="btn btn-outline-primary mt-1" for="option-{{ $training_category->id }}">{{ $training_category->name }}</label>
-  @endforeach
+  <div class="btn-left">
+    <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">
+      <label class="btn btn-outline-primary mt-1" for="option-all">All</label>
+    @foreach ($training_categories as $training_category)
+    <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction()">
+      <label class="btn btn-outline-primary mt-1" for="option-{{ $training_category->id }}">{{ $training_category->name }}</label>
+    @endforeach
+  </div>
   <!-- トレーニングメニューをjavascriptで追加 -->
-  <div id="btn-training-menu"></div>
+  <div id="btn-training-menu" class="btn-left"></div>
 </div>
 <!-- カレンダーグラフ切り替えボタン -->
-<div>
+<div class="btn-left">
   <input type="radio" class="btn-check" name="changes" id="option-calendar" autocomplete="off" checked onClick="calendarBtnAction()">
     <label class="btn btn-outline-primary mt-1" for="option-calendar">カレンダー</label>
   <input type="radio" class="btn-check" name="changes" id="option-graph" autocomplete="off" onClick="chartBtnAction()">
     <label class="btn btn-outline-primary mt-1" for="option-graph">グラフ</label>
 </div>
-<div class="row">
+<div class="row center-cards">
   <!-- カレンダー -->
-  <div id="myCalendar" class="wrapper col-6">
+  <div id="myCalendar" class="wrapper col-md-6">
     <h1 id="header"></h1>
     <div id="next-prev-button">
       <button id="prev" onclick="prev()">‹</button>
@@ -73,12 +75,12 @@
   </div>
 
   <!-- トレーニング結果（カード）javascriptで追加 -->
-  <div id="training-card" class="row col-6">
+  <div id="training-card" class="row col-md-6 center-cards">
   </div>
 </div>
 
 <!-- グラフ -->
-<div id="myChart" style="max-width:900px;max-height:450px;">
+<div id="myChart" style="max-width:900px;height:450px;">
   <canvas id="myChart1"></canvas>
 </div>
 

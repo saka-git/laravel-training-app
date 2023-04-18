@@ -8,7 +8,7 @@
 </script>
   <div class="row">
     <!-- サイドバー -->
-    <div class="col-2">
+    <div class="col-md-2 pc-sidebar">
       <div>
         <ul>
           <li><a href="{{ route('training_results.index') }}">Training</a></li>
@@ -16,14 +16,14 @@
         </ul>
       </div>
     </div>
-    <div class="col-9">
+    <div class="col-md-9">
       <!-- トレーニング追加用モーダル -->
       @include('modals.add_training_result')
       @if($latest_training_result)
       <div>
-        <h5 style="margin:8px">{{ \Carbon\Carbon::parse($latest_training_result->date)->format('n月j日') }}のトレーニンングメニュー</h5>
+        <h5 class="latest-date" style="margin:8px">{{ \Carbon\Carbon::parse($latest_training_result->date)->format('n月j日') }}のトレーニンングメニュー</h5>
       </div>
-      <div class="row">
+      <div class="row center-cards">
         @foreach ($distinct_training_menus as $distinct_training_menu)
           <div class="card col-3" style="width: 18rem; padding:0; margin:5px">
             <div class="card-header">

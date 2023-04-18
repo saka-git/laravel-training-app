@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTrainingResultModal">
+<button type="button" class="btn btn-primary add-result-modal" data-bs-toggle="modal" data-bs-target="#addTrainingResultModal">
   ＋ トレーニング
 </button>
 

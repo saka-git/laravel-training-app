@@ -72,6 +72,8 @@ const myChart = new Chart(ctx, {
     data: data,
     options: {
         responsive: true,
+        maintainAspectRatio: false,
+
         plugins: {
             legend: {
                 position: "top",
