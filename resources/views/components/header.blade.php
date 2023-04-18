@@ -18,6 +18,13 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ms-auto">
           <!-- Authentication Links -->
+          <li class="nav-item pc-hide">
+            <a class="nav-link hamburger-item" href="{{ route('training_results.index') }}">Training</a>
+          </li>
+          <li class="nav-item pc-hide">
+            <a>Group</a>
+          </li>
+
           @guest
           @if (Route::has('login'))
           <li class="nav-item">
