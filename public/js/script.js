@@ -75,16 +75,17 @@ const prev = () => {
     ).val();
     let checkedTrainingMenu = $('input[name="training-menus"]:checked').val();
 
-    // カレンダーとグラフのソート
-    if (checkedTrainingMenu == "all" || !checkedTrainingMenu) {
+    // カレンダーのソート
+    if (checkedTrainingCategory == "all") {
+        let calendar = createTable(year, month);
+        document.querySelector("#calendar").innerHTML = calendar;
+    } else if (checkedTrainingMenu == "all") {
         let calendar = createTable(
             year,
             month,
             sortTrainingCategoryMenu(checkedTrainingCategory)
         );
         document.querySelector("#calendar").innerHTML = calendar;
-
-        updateGraph(checkedTrainingCategory);
     } else {
         let calendar = createTable(
             year,
@@ -95,8 +96,6 @@ const prev = () => {
             )
         );
         document.querySelector("#calendar").innerHTML = calendar;
-
-        updateGraph(checkedTrainingCategory, checkedTrainingMenu);
     }
 };
 
@@ -109,7 +108,10 @@ const next = () => {
     let checkedTrainingMenu = $('input[name="training-menus"]:checked').val();
 
     // カレンダーとグラフのソート
-    if (checkedTrainingMenu == "all" || !checkedTrainingMenu) {
+    if (checkedTrainingCategory == "all") {
+        let calendar = createTable(year, month);
+        document.querySelector("#calendar").innerHTML = calendar;
+    } else if (checkedTrainingMenu == "all") {
         let calendar = createTable(
             year,
             month,

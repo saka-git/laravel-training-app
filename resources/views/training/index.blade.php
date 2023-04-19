@@ -46,7 +46,7 @@
 <!-- タブ -->
 <div>
   <div class="btn-left">
-    <input type="radio" class="btn-check" name="training-categories" id="option-all" autocomplete="off" checked onClick="allBtnAction()">
+    <input type="radio" class="btn-check" name="training-categories" id="option-all" value="all" autocomplete="off" checked onClick="allBtnAction()">
       <label class="btn btn-outline-primary mt-1" for="option-all">All</label>
     @foreach ($training_categories as $training_category)
     <input type="radio" class="btn-check" name="training-categories" id="option-{{ $training_category->id }}" value="{{ $training_category->id }}" autocomplete="off" onClick="trainingCategoryBtnAction()">
