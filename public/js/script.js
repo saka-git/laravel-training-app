@@ -233,7 +233,7 @@ const resultDisplay = (event) => {
     $("#training-card").empty();
 
     const date = event.target.getAttribute("data-date");
-    // TODO filterの括弧内のエレメントの意味
+    //
     const thatDayTrainingResults = trainingResults.filter(
         (training) => training.date === date
     );

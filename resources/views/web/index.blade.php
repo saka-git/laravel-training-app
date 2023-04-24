@@ -3,8 +3,9 @@
 @section('content')
 <!-- データ渡す用スクリプト -->
 <script>
-  //タブ
+  //
   const trainingMenus = @json($training_menus);
+  const trainingDates = @json($training_dates);
 </script>
   <div class="row">
     <!-- サイドバー -->
@@ -12,7 +13,7 @@
       <div>
         <ul>
           <li><a href="{{ route('training_results.index') }}">Training</a></li>
-          <li><a>Group</a></li>
+          <li><a href="{{ route('groups.index') }}">Group</a></li>
         </ul>
       </div>
     </div>
@@ -67,13 +68,7 @@
           <button id="next" onclick="next()">›</button>
         </div>
         <div id="calendar"></div>
-      </div>
-      <!-- TODO const letどっち？  -->
-      <script>
-        const trainingDates = @json($training_dates);
-
-      </script>
-  
+      </div>  
     </div>
   </div>
 

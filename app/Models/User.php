@@ -45,6 +45,16 @@ class User extends Authenticatable
     public function training_results()
     {
         return $this->hasMany('App\Models\TrainingResult');
+    }    
+    
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_user')->using(GroupUser::class)->withTimestamps();
+    }    
+    
+    public function introduced_groups()
+    {
+        return $this->belongsToMany(Group::class, 'invitations')->using(Invitation::class)->withTimestamps();
     }
 
 }

@@ -18,11 +18,11 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ms-auto">
           <!-- Authentication Links -->
-          <li class="nav-item pc-hide">
+          <li class="nav-item">
             <a class="nav-link hamburger-item" href="{{ route('training_results.index') }}">Training</a>
           </li>
-          <li class="nav-item pc-hide">
-            <a>Group</a>
+          <li class="nav-item">
+            <a class="nav-link hamburger-item" href="{{ route('groups.index') }}">Group</a>
           </li>
 
           @guest
