@@ -98,3 +98,22 @@ const myChart = new Chart(ctx, {
         },
     },
 });
+
+// selectのグループが変更されたとき
+const changeGroup = () => {
+    let groupId = document.getElementById("group_id").value;
+    let options = ``;
+    for (let i = 0; i < groupUser.length; i++) {
+        if (groupId == groupUser[i].group_id)
+            options += `<option value="${groupUser[i].user_id}">${groupUser[i].name}</option>`;
+    }
+    const newForm =
+        `
+        <select class="form-select" name="user_id" id="user_id" onchange="changeUser()">
+        <option selected>ユーザーを選択してください</option>` +
+        options +
+        `
+        </select>`;
+
+    document.getElementById("select-user").innerHTML = newForm;
+};

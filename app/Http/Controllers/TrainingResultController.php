@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TrainingCategory;
 use App\Models\TrainingMenu;
 use App\Models\TrainingResult;
+use App\Models\GroupUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,7 @@ class TrainingResultController extends Controller
      */
     public function index()
     {
+
         $user_id = Auth::user()->id;
 
         $training_categories = TrainingCategory::all();
@@ -46,11 +48,22 @@ class TrainingResultController extends Controller
             $date_range[] = date('Y-m-d', strtotime("+{$i} day", strtotime($start_ymd)));
         }
 
+
+        // グループ共有用データ
+        $groupIds = auth()->user()->groups->pluck('id');
+        $group_users = DB::select("select group_id, user_id,name from group_user, users where group_user.user_id=users.id");        
+
+        
+
+
         // カレンダー→トレーニングリザルトのデータ取得
         $distinct_training_all_menus = DB::select("select distinct training_menu_id, name, date from training_results, training_menus where training_results.training_menu_id=training_menus.id and training_results.user_id = $user_id");
 
 
-        return view('training.index', compact('training_categories', 'training_menus', 'training_results', 'training_dates','twoweeks_max_results','twoweeks_total_results', 'date_range', 'distinct_training_all_menus','twoweeks_max_menu_results','twoweeks_total_menu_results','twoweeks_max_category_results','twoweeks_total_category_results'));
+        return view('training.index', compact('training_categories', 'training_menus',
+        'training_results', 'training_dates','twoweeks_max_results','twoweeks_total_results',
+        'date_range', 'distinct_training_all_menus','twoweeks_max_menu_results','twoweeks_total_menu_results',
+        'twoweeks_max_category_results','twoweeks_total_category_results','group_users'));
     }
 
     /**

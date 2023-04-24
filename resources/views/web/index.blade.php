@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+{{-- jsファイル読み込み --}}
+@push('scripts')
+<script src="{{ asset('/js/script.js') }}"></script>
+@endpush
+
 @section('content')
 <!-- データ渡す用スクリプト -->
 <script>
