@@ -7,6 +7,7 @@
 
 {{-- jsファイル読み込み --}}
 @push('scripts')
+<script src="{{ asset('/js/script.js') }}"></script>
 <script src="{{ asset('/js/training.js') }}"></script>
 @endpush
 
@@ -30,6 +31,9 @@
   const trainingMaxCategoryResults = @json($twoweeks_max_category_results);
   const trainingTotalCategoryResults = @json($twoweeks_total_category_results);
 
+  // データ共有
+  const groupUser = @json($group_users);
+
 </script>
 <!-- トレーニング追加用モーダル -->
 @include('modals.add_training_result')
@@ -45,6 +49,17 @@
 
 <!-- タブ -->
 <div>
+  <div class="d-flex">
+    <div class="select-group">
+      <select class="form-select" name="group_id" id="group_id" onchange="changeGroup()">
+        <option selected>グループを選択してください</option>
+        @foreach (auth()->user()->groups as $group)
+          <option value="{{ $group->id }}">{{ $group->name }}</option>
+        @endforeach
+      </select>
+    </div>
+    <div id="select-user" style="width:200px"></div>
+  </div>
   <div class="btn-left">
     <input type="radio" class="btn-check" name="training-categories" id="option-all" value="all" autocomplete="off" checked onClick="allBtnAction()">
       <label class="btn btn-outline-primary mt-1" for="option-all">All</label>

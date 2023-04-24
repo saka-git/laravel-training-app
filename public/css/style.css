@@ -84,6 +84,16 @@ td.today {
     margin-left: 12px;
 }
 
+.select-group {
+    width: 200px;
+    margin: 4px 4px 0 12px;
+}
+
+#select-user {
+    width: 200px;
+    margin-top: 4px;
+}
+
 /*================
 PC用のスタイル
 =================*/

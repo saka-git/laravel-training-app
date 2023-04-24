@@ -51,11 +51,7 @@
                     </a>
                   </button> --}}
                 </div>
-              </form>
-              <div>
-              {{-- // TODO:下記のようにページネーターを記述するとページネートで次ページに遷移しても、検索結果を保持する --}}
-                  {{-- {{ $institutions->appends(request()->input())->links() }} --}}
-              </div>            
+              </form>       
             </div>
             <ul class="list-group">
               @foreach($users as $user)
