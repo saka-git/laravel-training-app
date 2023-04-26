@@ -16,11 +16,11 @@
         <div class="modal-body">
           <div class="form-group">
             <label>グループ名</label>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name" class="form-control required">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">作成</button>
+          <button type="submit" id="group-submit" class="btn btn-primary">作成</button>
         </div>
       </form>  
     </div>

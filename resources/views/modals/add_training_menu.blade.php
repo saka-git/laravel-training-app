@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">追加</button>
+          <button type="submit" id="menu-submit" class="btn btn-primary">追加</button>
         </div>
       </form>  
     </div>

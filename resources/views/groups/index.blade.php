@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+{{-- jsファイル読み込み --}}
+@push('scripts')
+<script src="{{ asset('/js/group.js') }}"></script>
+@endpush
+
 @section('content')
 
 <div class="row">

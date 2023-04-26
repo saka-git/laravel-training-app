@@ -2,6 +2,45 @@ let year;
 let month;
 const trainingAllDates = trainingDates;
 
+// バリデーション（リザルト）
+window.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        /*各画面オブジェクト*/
+        const btnSubmit = document.getElementById("result-submit");
+
+        btnSubmit.addEventListener("click", function (event) {
+            const requiredElems = document.querySelectorAll(".required");
+            const numberElems = document.querySelectorAll(".num");
+            let message = [];
+            /*入力値チェック*/
+            //.required を指定した要素を検証
+            requiredElems.forEach((elem) => {
+                //値が空の場合はエラーを表示してフォームの送信を中止
+                if (elem.value.trim() == "") {
+                    message.push("入力は必須です");
+                }
+            });
+            //.num を指定した要素を検証
+            numberElems.forEach((elem) => {
+                //値が空でなければ
+                if (elem.value !== "") {
+                    //数字以外が含まれていればエラーを表示してフォームの送信を中止
+                    if (isNaN(elem.value)) {
+                        message.push("数字を入力してください。");
+                    }
+                }
+            });
+            //エラーメッセージがある場合は、フォームの送信を中止してエラーメッセージを表示する
+            if (message.length > 0) {
+                event.preventDefault(); //フォーム送信を中止
+                alert(message.join("\n")); //エラーメッセージを表示
+            }
+        });
+    },
+    false
+);
+
 //トレーニングリザルトのset追加の処理
 $("#add-set-button").on("click", function () {
     const setCount = $(".number").length + 1;
@@ -18,12 +57,12 @@ $("#add-set-button").on("click", function () {
         setCount +
         `set目</label>
                 <div class="input-group mt-2 mb-2" style="width:35%">
-                    <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
+                    <input type="number" class="form-control add-weight num" placeholder="100" aria-describedby="weight" name="weight[]">
                     <span class="input-group-text" id="weight">kg</span>
                 </div>
                 <div style="width:fit-content; margin:5px" class="d-flex align-items-center">×</div>
                 <div class="input-group mt-2 mb-2" style="width:35%">
-                    <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
+                    <input type="number" class="form-control add-rep required num" placeholder="10" aria-describedby="rep" name="rep[]">
                     <span class="input-group-text" id="rep">回</span>
                 </div>
                 <button type="button" class="btn btn-outline-danger mt-2 mb-2 ms-2" onClick="removeSet(this)">- set</button>
