@@ -11,12 +11,12 @@
         <h5 class="modal-title" id="exampleModalLabel">トレーニングの追加</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="{{ route('training_results.store') }}" method="post">
+      <form action="{{ route('training_results.store') }}" id="result-form" method="post">
         @csrf
         <div class="modal-body">
           <div id="training-result-form">
             <div>
-              <input type="date" name="date" id="add-date" value="<?php echo date('Y-m-d');?>">
+              <input type="date" name="date" id="add-date" class="required" value="<?php echo date('Y-m-d');?>">
               <div class="d-flex">
                   <label style="width:fit-content; margin:5px" class="d-flex align-items-center">トレーニングメニュー</label>
                 <select id="add-select" class="form-select mt-2 mb-2" style="flex:1; width:auto" name="training_menu_id">
@@ -30,12 +30,12 @@
               <div style="display:flex">
                 <label style="margin:0 auto" class="d-flex align-items-center">1set目</label>
                 <div class="input-group mt-2 mb-2" style="width:35%">
-                  <input type="number" class="form-control" placeholder="100" aria-describedby="weight" name="weight[]">
+                  <input type="number" class="form-control num" placeholder="100" aria-describedby="weight" name="weight[]">
                   <span class="input-group-text" id="weight">kg</span>
                 </div>
                 <div style="width:fit-content; margin:5px" class="d-flex align-items-center">×</div>
                 <div class="input-group mt-2 mb-2" style="width:35%">
-                  <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep[]">
+                  <input type="number" class="form-control required num" placeholder="10" aria-describedby="rep" name="rep[]">
                   <span class="input-group-text" id="rep">回</span>
                 </div>
                 <button type="button" class="btn btn-outline-danger mt-2 mb-2 ms-2" onClick="removeSet(this)">- set</button>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">追加</button>
+          <button type="submit" id="result-submit" class="btn btn-primary ">追加</button>
         </div>
       </form>
     </div>

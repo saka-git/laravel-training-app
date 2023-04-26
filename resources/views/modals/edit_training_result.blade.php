@@ -6,7 +6,7 @@
         <h5 class="modal-title" id="editTrainingResultModalLabel{{ $training_result->id }}">トレーニングの編集</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
       </div>
-      <form action="{{ route('training_results.update', $training_result->id) }}" method="post">
+      <form action="{{ route('training_results.update', $training_result->id) }}" method="post" class="edit-result">
         @csrf
         @method('patch')
         <div class="modal-body">
@@ -29,14 +29,14 @@
               </div>
               <div>×</div>
               <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="10" aria-describedby="rep" name="rep" value="{{ $training_result->rep }}">
+                <input type="number" class="form-control required" placeholder="10" aria-describedby="rep" name="rep" value="{{ $training_result->rep }}">
                 <span class="input-group-text" id="rep">回</span>
               </div>
             </div>
           </div>        
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">更新</button>
+          <button type="submit" class="btn btn-primary edit-submit">更新</button>
         </div>
       </form>
     </div>
